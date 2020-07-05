@@ -1,7 +1,6 @@
 const express = require('express'); //load express
 const hbs = require('hbs'); //load handlebars
 const fs = require('fs');
-const port = process.env.PORT || 3000;
 const app = express();  //make a new express app
 hbs.registerPartials(__dirname + '/views/partials');
 hbs.registerHelper('getCurrentYear', () => {
@@ -37,6 +36,6 @@ app.get('/about', (req, res) => {
     pageTitle: 'Om Japansk Teshop',
   });
 });
-app.listen(port, () => {  //bind app to port 3000
-  console.log(`Server is up on port ${port}`);
+app.listen(3000, () => {  //bind app to port 3000
+  console.log('Server is up on port 3000');
 });
