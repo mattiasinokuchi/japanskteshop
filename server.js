@@ -22,9 +22,9 @@ app.use((req, res, next) => { //register middleware to serve a logger
   });
   next();
 });
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
   res.render('maintenance.hbs');
-});
+});*/
 app.use(express.static(__dirname + '/public')); //add middleware to serve static HTML pages
 app.get('/', (req, res) => {
   res.render('home.hbs', {
@@ -35,6 +35,11 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
     pageTitle: 'Om Japansk Teshop',
+  });
+});
+app.get('/contact', (req, res) => {
+  res.render('contact.hbs', {
+    pageTitle: 'Kontakta affären',
   });
 });
 app.listen(port, () => {  //bind app to port 3000
