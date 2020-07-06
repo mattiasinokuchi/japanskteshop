@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 });
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
-    pageTitle: 'Om Japansk Teshop',
+    pageTitle: 'Om affären',
   });
 });
 app.get('/contact', (req, res) => {
