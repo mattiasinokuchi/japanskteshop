@@ -1,6 +1,7 @@
 const express = require('express'); //load express
 const hbs = require('hbs'); //load handlebars
 const fs = require('fs');
+const port = process.env.PORT || 3000;
 const app = express();  //make a new express app
 hbs.registerPartials(__dirname + '/views/partials');
 hbs.registerHelper('getCurrentYear', () => {
@@ -21,9 +22,9 @@ app.use((req, res, next) => { //register middleware to serve a logger
   });
   next();
 });
-/*app.use((req, res, next) => {
+app.use((req, res, next) => {
   res.render('maintenance.hbs');
-});*/
+});
 app.use(express.static(__dirname + '/public')); //add middleware to serve static HTML pages
 app.get('/', (req, res) => {
   res.render('home.hbs', {
@@ -36,6 +37,6 @@ app.get('/about', (req, res) => {
     pageTitle: 'Om Japansk Teshop',
   });
 });
-app.listen(3000, () => {  //bind app to port 3000
-  console.log('Server is up on port 3000');
+app.listen(port, () => {  //bind app to port 3000
+  console.log(`Server is up on port ${port}`);
 });
