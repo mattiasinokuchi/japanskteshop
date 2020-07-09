@@ -32,6 +32,11 @@ app.get('/', (req, res) => {
     welcomeMessage: 'Välkommen till min nya affär!!!',
   });
 });
+app.get('/tea', (req, res) => {
+  res.render('tea.hbs', {
+    pageTitle: 'Te',
+  });
+});
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
     pageTitle: 'Om affären',
