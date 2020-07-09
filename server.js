@@ -37,6 +37,21 @@ app.get('/tea', (req, res) => {
     pageTitle: 'Te',
   });
 });
+app.get('/genmai', (req, res) => {
+  res.render('genmai.hbs', {
+    pageTitle: 'Genmaicha',
+  });
+});
+app.get('/macha', (req, res) => {
+  res.render('macha.hbs', {
+    pageTitle: 'Macha',
+  });
+});
+app.get('/sencha', (req, res) => {
+  res.render('sencha.hbs', {
+    pageTitle: 'Sencha',
+  });
+});
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
     pageTitle: 'Om affären',
