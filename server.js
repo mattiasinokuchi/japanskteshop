@@ -52,6 +52,11 @@ app.get('/sencha', (req, res) => {
     pageTitle: 'Sencha',
   });
 });
+app.get('/checkout', (req, res) => {
+  res.render('checkout.hbs', {
+    pageTitle: 'Kassan',
+  });
+});
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
     pageTitle: 'Om affären',
