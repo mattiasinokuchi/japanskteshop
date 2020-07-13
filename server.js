@@ -54,7 +54,7 @@ app.get('/sencha', (req, res) => {
 });
 app.get('/checkout', (req, res) => {
   res.render('checkout.hbs', {
-    pageTitle: 'Kassan',
+    pageTitle: 'Kassa',
   });
 });
 app.get('/about', (req, res) => {
