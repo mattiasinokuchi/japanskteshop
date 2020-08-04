@@ -32,8 +32,8 @@ app.get('/', (req, res) => {
     welcomeMessage: 'Välkommen till min nya affär!!!',
   });
 });
-app.get('/tea', (req, res) => {
-  res.render('tea.hbs', {
+app.get('/goods', (req, res) => {
+  res.render('goods.hbs', {
     pageTitle: 'Te',
   });
 });
