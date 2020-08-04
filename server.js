@@ -40,16 +40,22 @@ app.get('/goods', (req, res) => {
 app.get('/genmai', (req, res) => {
   res.render('tea.hbs', {
     pageTitle: 'Genmaicha',
+    description: 'Här kommer snart en beskrivning',
+    price: 50
   });
 });
 app.get('/macha', (req, res) => {
   res.render('tea.hbs', {
     pageTitle: 'Macha',
+    description: 'Här kommer snart en till beskrivning',
+    price: 51
   });
 });
 app.get('/sencha', (req, res) => {
   res.render('tea.hbs', {
     pageTitle: 'Sencha',
+    description: 'Här kommer snart ännu en beskrivning',
+    price: 52
   });
 });
 app.get('/checkout', (req, res) => {

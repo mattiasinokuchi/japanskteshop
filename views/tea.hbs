@@ -6,11 +6,10 @@
   </head>
   <body>
     {{> header}}
-    <p>Här kommer snart en varubeskrivning</p>
-    <p>Pris ? kr per förpackning</p>
+    <p>{{description}}</p>
+    <p>Pris {{price}} kr per förpackning</p>
     <div class="quantity-setter">
-      <input type="number" id="quantity-input" min="1" value="1" />
-      <button id="basket-button">Lägg i korgen</button>
+      <button id="basket-button">Lägg en i korgen</button>
     </div>
     {{> footer}}
   </body>
