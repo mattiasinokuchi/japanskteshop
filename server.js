@@ -38,17 +38,17 @@ app.get('/goods', (req, res) => {
   });
 });
 app.get('/genmai', (req, res) => {
-  res.render('genmai.hbs', {
+  res.render('tea.hbs', {
     pageTitle: 'Genmaicha',
   });
 });
 app.get('/macha', (req, res) => {
-  res.render('macha.hbs', {
+  res.render('tea.hbs', {
     pageTitle: 'Macha',
   });
 });
 app.get('/sencha', (req, res) => {
-  res.render('sencha.hbs', {
+  res.render('tea.hbs', {
     pageTitle: 'Sencha',
   });
 });
