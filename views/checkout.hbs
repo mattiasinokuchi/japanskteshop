@@ -3,11 +3,107 @@
   <head>
     <meta charset="utf-8">
     <title>Kassa</title>
+    <!-- load stripe.js -->
     <script src="https://js.stripe.com/v3/"></script>
   </head>
   <body>
     {{> header}}
     <p>Det här finns i din korg:</p>
+    <section class="container">
+      <div class="quantity-setter">
+        <button class="increment-btn" id="subtract" disabled>
+          -
+        </button>
+        <input type="number" id="quantity-input" min="1" value="1" />
+        <button class="increment-btn" id="add">+</button>
+      </div>
+      <button id="basic-photo-button">
+        Köp för <span id="total">5</span> kr
+      </button>
+    </section>
     {{> footer}}
+    <script>
+      // Publishable key from API keys in the Stripe Dashboard
+      var PUBLISHABLE_KEY = "pk_live_QAeLzztCGto6VeIqPuUCGcF100c8v0Efqb";
+      // Replace with the domain you want your users to be redirected back to after payment
+      var DOMAIN = window.location.hostname;
+      // SKU created in the Stripe Dashboard
+      var SKU_ID = "sku_GWpdbzpAxPznoC";
+
+      var MIN_PHOTOS = 1;
+      var MAX_PHOTOS = 10;
+
+      var stripe = Stripe(PUBLISHABLE_KEY);
+
+      var basicPhotoButton = document.getElementById("basic-photo-button");
+      document
+        .getElementById("quantity-input")
+        .addEventListener("change", function(evt) {
+          // Ensure customers only buy between 1 and 10 photos
+          if (evt.target.value < MIN_PHOTOS) {
+            evt.target.value = MIN_PHOTOS;
+          }
+          if (evt.target.value > MAX_PHOTOS) {
+            evt.target.value = MAX_PHOTOS;
+          }
+        });
+
+      var updateQuantity = function(evt) {
+        if (evt && evt.type === "keypress" && evt.keyCode !== 13) {
+          return;
+        }
+
+        var isAdding = evt.target.id === "add";
+        var inputEl = document.getElementById("quantity-input");
+        var currentQuantity = parseInt(inputEl.value);
+
+        document.getElementById("add").disabled = false;
+        document.getElementById("subtract").disabled = false;
+
+        var quantity = isAdding ? currentQuantity + 1 : currentQuantity - 1;
+
+        inputEl.value = quantity;
+        document.getElementById("total").textContent = quantity * 5;
+
+        // Disable the button if the customers hits the max or min
+        if (quantity === MIN_PHOTOS) {
+          document.getElementById("subtract").disabled = true;
+        }
+        if (quantity === MAX_PHOTOS) {
+          document.getElementById("add").disabled = true;
+        }
+      };
+
+      Array.from(document.getElementsByClassName("increment-btn")).forEach(
+        element => {
+          element.addEventListener("click", updateQuantity);
+        }
+      );
+
+      // Handle any errors from Checkout
+      var handleResult = function(result) {
+        if (result.error) {
+          var displayError = document.getElementById("error-message");
+          displayError.textContent = result.error.message;
+        }
+      };
+
+      basicPhotoButton.addEventListener("click", function() {
+        var quantity = parseInt(
+          document.getElementById("quantity-input").value
+        );
+
+        // Make the call to Stripe.js to redirect to the checkout page
+        // with the current quantity
+      stripe
+          .redirectToCheckout({
+            items: [{ sku: SKU_ID, quantity: quantity }],
+            successUrl:
+              DOMAIN + "/success.html?session_id={CHECKOUT_SESSION_ID}",
+            cancelUrl: DOMAIN + "/canceled.html"
+          })
+          .then(handleResult);
+      });
+    </script>
   </body>
 </html>
