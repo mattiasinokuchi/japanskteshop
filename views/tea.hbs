@@ -12,5 +12,13 @@
       <button id="basket-button">Lägg en i korgen</button>
     </div>
     {{> footer}}
+    <script>
+      let basket = [];
+      const button = document.querySelector('button');
+      button.onclick = () => {
+        basket.push("{{pageTitle}}");
+        alert(basket);
+      }
+    </script>
   </body>
 </html>
