@@ -26,7 +26,7 @@
       // Publishable key from API keys in the Stripe Dashboard
       var PUBLISHABLE_KEY = "pk_live_QAeLzztCGto6VeIqPuUCGcF100c8v0Efqb";
       // Replace with the domain you want your users to be redirected back to after payment
-      var DOMAIN = window.location.hostname;
+      var DOMAIN = location.href.replace(/[^/]*$/, "");
       // SKU created in the Stripe Dashboard
       var SKU_ID = "sku_GWpdbzpAxPznoC";
 
