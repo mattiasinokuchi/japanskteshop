@@ -11,9 +11,6 @@
     <p>Det här finns i din korg:</p>
     <section class="container">
       <div class="quantity-setter">
-        <button class="increment-btn" id="subtract" disabled>
-          -
-        </button>
         <input type="number" id="quantity-input" min="1" value="1" />
         <button class="increment-btn" id="add">Lägg i korgen</button>
       </div>
@@ -58,20 +55,11 @@
         var currentQuantity = parseInt(inputEl.value);
 
         document.getElementById("add").disabled = false;
-        document.getElementById("subtract").disabled = false;
 
         var quantity = isAdding ? currentQuantity + 1 : currentQuantity - 1;
 
         inputEl.value = quantity;
         document.getElementById("total").textContent = quantity * 5;
-
-        // Disable the button if the customers hits the max or min
-        if (quantity === MIN_PHOTOS) {
-          document.getElementById("subtract").disabled = true;
-        }
-        if (quantity === MAX_PHOTOS) {
-          document.getElementById("add").disabled = true;
-        }
       };
 
       Array.from(document.getElementsByClassName("increment-btn")).forEach(
