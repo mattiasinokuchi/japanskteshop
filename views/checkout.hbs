@@ -14,7 +14,7 @@
         <input type="number" id="quantity-input" min="1" value="1" />
         <button class="increment-btn" id="add">Lägg i korgen</button>
       </div>
-      <button id="basic-photo-button">
+      <button id="basic-button">
         Köp för <span id="total">5</span> kr
       </button>
     </section>
@@ -27,39 +27,19 @@
       // SKU created in the Stripe Dashboard
       var SKU_ID = "sku_GWpdbzpAxPznoC";
 
-      var MIN_PHOTOS = 1;
-      var MAX_PHOTOS = 10;
-
       var stripe = Stripe(PUBLISHABLE_KEY);
 
-      var basicPhotoButton = document.getElementById("basic-photo-button");
-      document
-        .getElementById("quantity-input")
-        .addEventListener("change", function(evt) {
-          // Ensure customers only buy between 1 and 10 photos
-          if (evt.target.value < MIN_PHOTOS) {
-            evt.target.value = MIN_PHOTOS;
-          }
-          if (evt.target.value > MAX_PHOTOS) {
-            evt.target.value = MAX_PHOTOS;
-          }
-        });
+      var basicButton = document.getElementById("basic-button");
 
       var updateQuantity = function(evt) {
         if (evt && evt.type === "keypress" && evt.keyCode !== 13) {
           return;
         }
-
-        var isAdding = evt.target.id === "add";
         var inputEl = document.getElementById("quantity-input");
         var currentQuantity = parseInt(inputEl.value);
-
-        document.getElementById("add").disabled = false;
-
-        var quantity = isAdding ? currentQuantity + 1 : currentQuantity - 1;
-
+        var quantity = currentQuantity + 1;
         inputEl.value = quantity;
-        document.getElementById("total").textContent = quantity * 5;
+        document.getElementById("total").textContent = quantity;
       };
 
       Array.from(document.getElementsByClassName("increment-btn")).forEach(
@@ -76,7 +56,7 @@
         }
       };
 
-      basicPhotoButton.addEventListener("click", function() {
+      basicButton.addEventListener("click", function() {
         var quantity = parseInt(
           document.getElementById("quantity-input").value
         );
