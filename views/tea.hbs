@@ -8,16 +8,19 @@
     {{> header}}
     <p>{{description}}</p>
     <p>Pris {{price}} kr per förpackning</p>
-    <div class="quantity-setter">
-      <button id="basket-button">Lägg en i korgen</button>
-    </div>
+    <button>Lägg en i korgen</button>
+    <label>0</label>
     {{> footer}}
     <script>
-      let basket = [];
-      const button = document.querySelector('button');
-      button.onclick = () => {
-        basket.push("{{pageTitle}}");
-        alert(basket);
+      let myButton = document.querySelector('button');
+      let myLabel = document.querySelector('label');
+      let myCounts = 0;
+      function count () {
+        myCounts++;
+        myLabel.textContent = myCounts;
+      }
+      myButton.onclick = function() {
+        count();
       }
     </script>
   </body>
