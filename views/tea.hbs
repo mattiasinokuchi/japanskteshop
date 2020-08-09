@@ -9,18 +9,18 @@
     <p>{{description}}</p>
     <p>Pris {{price}} kr per förpackning</p>
     <button>Lägg en i korgen</button>
-    <label>0</label>
     {{> footer}}
+    <label></label>
     <script>
       let myButton = document.querySelector('button');
       let myLabel = document.querySelector('label');
-      let myCounts = 0;
-      function count () {
-        myCounts++;
-        myLabel.textContent = myCounts;
+      let myStuff = [];
+      function addStuff () {
+          myStuff.push("{{pageTitle}}");
+          myLabel.textContent = myStuff;
       }
       myButton.onclick = function() {
-        count();
+        addStuff();
       }
     </script>
   </body>
