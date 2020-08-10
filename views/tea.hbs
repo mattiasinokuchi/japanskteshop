@@ -8,20 +8,76 @@
     {{> header}}
     <p>{{description}}</p>
     <p>Pris {{price}} kr per förpackning</p>
-    <button>Lägg en i korgen</button>
+    <form name="ShoppingList">
+        <fieldset>
+            <legend>Shopping cart</legend>
+            <label>Item: <input type="text" name="name"></label>
+            <label>Quantity: <input type="text" name="data"></label>
+
+            <input type="button" value="Save"   onclick="SaveItem()">
+            <input type="button" value="Update" onclick="ModifyItem()">
+            <input type="button" value="Delete" onclick="RemoveItem()">
+        </fieldset>
+        <div id="items_table">
+            <h2>Shopping List</h2>
+            <table id="list"></table>
+            <label><input type="button" value="Clear" onclick="ClearAll()">
+            * Delete all items</label>
+        </div>
+    </form>
     {{> footer}}
-    <label></label>
     <script>
-      let myButton = document.querySelector('button');
-      let myLabel = document.querySelector('label');
-      let myStuff = [];
-      function addStuff () {
-          myStuff.push("{{pageTitle}}");
-          myLabel.textContent = myStuff;
+      //call function to check for browser support and show table for shopping
+      window.load=doShowAll();
+      //populate table with items
+      function doShowAll() {
+        var key = "";
+        var list = "<tr><th>Item</th><th>Value</th></tr>\n";
+        var i = 0;
+        //For a more advanced feature, you can set a cap on max items in the cart.
+        for (i = 0; i <= localStorage.length-1; i++) {
+          key = localStorage.key(i);
+          list += "<tr><td>" + key + "</td>\n<td>"
+          + localStorage.getItem(key) + "</td></tr>\n";
+        }
+        //if no item exists in the cart.
+        if (list == "<tr><th>Item</th><th>Value</th></tr>\n") {
+          list += "<tr><td><i>empty</i></td>\n<td><i>empty</i></td></tr>\n";
+        }
+        //bind data to HTML table.
+        document.getElementById('list').innerHTML = list;
       }
-      myButton.onclick = function() {
-        addStuff();
+      //save key-value pair, get JavaScript object and call setItem method
+      function SaveItem() {
+        var name = document.forms.ShoppingList.name.value;
+        var data = document.forms.ShoppingList.data.value;
+        localStorage.setItem(name, data);
+        doShowAll();
       }
+      //change an item in storage
+      function ModifyItem() {
+        var name1 = document.forms.ShoppingList.name.value;
+        var data1 = document.forms.ShoppingList.data.value;
+        //check if key exists
+        if (localStorage.getItem(name1) !=null) {
+          //update
+          localStorage.setItem(name1,data1);
+          document.forms.ShoppingList.data.value = localStorage.getItem(name1);
+        }
+        doShowAll();
+      }
+      //delete an item from storage
+      function RemoveItem() {
+        var name=document.forms.ShoppingList.name.value;
+        document.forms.ShoppingList.data.value=localStorage.removeItem(name);
+        doShowAll();
+      }
+      //clear the local storage,
+      function ClearAll() {
+        localStorage.clear();
+        doShowAll();
+      }
+
     </script>
   </body>
 </html>
