@@ -40,12 +40,14 @@
       //populate table with items
       function doShowAll() {
         var key = "";
+        var link ="";
         var list = "<tr><th></th><th>Antal</th></tr>\n";
         var i = 0;
         //For a more advanced feature, you can set a cap on max items in the cart.
         for (i = 0; i <= localStorage.length-1; i++) {
           key = localStorage.key(i);
-          list += "<tr><td>" + key + "</td>\n<td>"
+          link = '<a href="' + key + '">' + key + '</a>';
+          list += "<tr><td>" + link + "</td>\n<td>"
           + localStorage.getItem(key) + "</td></tr>\n";
         }
         //if no item exists in the cart.

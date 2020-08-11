@@ -37,7 +37,7 @@ app.get('/goods', (req, res) => {
     pageTitle: 'Te',
   });
 });
-app.get('/genmai', (req, res) => {
+app.get('/genmaicha', (req, res) => {
   res.render('tea.hbs', {
     pageTitle: 'Genmaicha',
     description: 'Här kommer snart en beskrivning',
