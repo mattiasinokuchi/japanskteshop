@@ -9,17 +9,16 @@
     <p>{{description}}</p>
     <p>Pris {{price}} kr per förpackning</p>
     <form name="ShoppingList">
-        <fieldset>
-            <label>Item: <input type="text" name="name"></label>
-            <label>Quantity: <input type="text" name="data"></label>
-            <input type="button" value="Save"   onclick="SaveItem()">
-            <input type="button" value="Update" onclick="ModifyItem()">
-            <input type="button" value="Delete" onclick="RemoveItem()">
-        </fieldset>
+      <fieldset>
+        <label>Item: <input type="text" name="name"></label>
+        <label>Quantity: <input type="text" name="data"></label>
+        <input type="button" value="Save"   onclick="SaveItem()">
+        <input type="button" value="Update" onclick="ModifyItem()">
+        <input type="button" value="Delete" onclick="RemoveItem()">
+      </fieldset>
         <div id="items_table">
-            <h2>I korgen</h2>
-            <table id="list"></table>
-            <input type="button" value="Töm korgen" onclick="ClearAll()">
+          <h2>I korgen</h2>
+          <table id="list"></table>
         </div>
     </form>
     {{> footer}}
@@ -69,12 +68,6 @@
         document.forms.ShoppingList.data.value=localStorage.removeItem(name);
         doShowAll();
       }
-      //clear the local storage,
-      function ClearAll() {
-        localStorage.clear();
-        doShowAll();
-      }
-
     </script>
   </body>
 </html>
