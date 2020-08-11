@@ -24,7 +24,19 @@
     <script>
 
       //call function to check for browser support and show table for shopping
-      window.load=doShowAll();
+      window.load=doShowAll(),showInput();
+
+      //populate input with amount
+      function showInput() {
+        var input = "";
+        //check if item exists
+        console.log(localStorage.getItem("{{pageTitle}}"));
+        if (localStorage.getItem("{{pageTitle}}") !=null) {
+          document.forms.ShoppingList.data.value = localStorage.getItem("{{pageTitle}}");
+        } else {
+          document.forms.ShoppingList.data.value = "0";
+        }
+      }
 
       //populate table with items
       function doShowAll() {
