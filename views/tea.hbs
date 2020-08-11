@@ -10,21 +10,22 @@
     <p>Pris {{price}} kr per förpackning</p>
     <form name="ShoppingList">
       <fieldset>
-        <label>Item: <input type="text" name="name"></label>
         <label>Quantity: <input type="text" name="data"></label>
         <input type="button" value="Save"   onclick="SaveItem()">
         <input type="button" value="Update" onclick="ModifyItem()">
         <input type="button" value="Delete" onclick="RemoveItem()">
       </fieldset>
         <div id="items_table">
-          <h2>I korgen</h2>
+          <h2>I korgen:</h2>
           <table id="list"></table>
         </div>
     </form>
     {{> footer}}
     <script>
+
       //call function to check for browser support and show table for shopping
       window.load=doShowAll();
+
       //populate table with items
       function doShowAll() {
         var key = "";
@@ -43,6 +44,7 @@
         //bind data to HTML table.
         document.getElementById('list').innerHTML = list;
       }
+
       //save key-value pair, get JavaScript object and call setItem method
       function SaveItem() {
         var name = "{{pageTitle}}";
@@ -52,7 +54,7 @@
       }
       //change an item in storage
       function ModifyItem() {
-        var name1 = document.forms.ShoppingList.name.value;
+        var name1 = "{{pageTitle}}";
         var data1 = document.forms.ShoppingList.data.value;
         //check if key exists
         if (localStorage.getItem(name1) !=null) {
@@ -64,7 +66,7 @@
       }
       //delete an item from storage
       function RemoveItem() {
-        var name=document.forms.ShoppingList.name.value;
+        var name = "{{pageTitle}}";
         document.forms.ShoppingList.data.value=localStorage.removeItem(name);
         doShowAll();
       }
