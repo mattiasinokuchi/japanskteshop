@@ -49,37 +49,11 @@
         //bind data to HTML table.
         document.getElementById('list').innerHTML = list;
       }
-      //save key-value pair, get JavaScript object and call setItem method
-      function SaveItem() {
-        var name = "{{pageTitle}}";
-        var data = document.forms.ShoppingList.data.value;
-        localStorage.setItem(name, data);
-        doShowAll();
-      }
-      //change an item in storage
-      function ModifyItem() {
-        var name1 = document.forms.ShoppingList.name.value;
-        var data1 = document.forms.ShoppingList.data.value;
-        //check if key exists
-        if (localStorage.getItem(name1) !=null) {
-          //update
-          localStorage.setItem(name1,data1);
-          document.forms.ShoppingList.data.value = localStorage.getItem(name1);
-        }
-        doShowAll();
-      }
-      //delete an item from storage
-      function RemoveItem() {
-        var name=document.forms.ShoppingList.name.value;
-        document.forms.ShoppingList.data.value=localStorage.removeItem(name);
-        doShowAll();
-      }
       //clear the local storage,
       function ClearAll() {
         localStorage.clear();
         doShowAll();
       }
-
       // Publishable key from API keys in the Stripe Dashboard
       var PUBLISHABLE_KEY = "pk_live_QAeLzztCGto6VeIqPuUCGcF100c8v0Efqb";
       // Replace with the domain you want your users to be redirected back to after payment
