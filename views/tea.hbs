@@ -16,6 +16,11 @@
             <input type="button" value="Update" onclick="ModifyItem()">
             <input type="button" value="Delete" onclick="RemoveItem()">
         </fieldset>
+        <div id="items_table">
+            <h2>I korgen</h2>
+            <table id="list"></table>
+            <input type="button" value="Töm korgen" onclick="ClearAll()">
+        </div>
     </form>
     {{> footer}}
     <script>
