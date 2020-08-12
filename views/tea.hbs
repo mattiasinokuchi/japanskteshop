@@ -10,7 +10,8 @@
     <p>Pris {{price}} kr per förpackning</p>
     <form name="ShoppingList">
       <fieldset>
-        <label>Antal i korgen: <input type="text" name="data"></label>
+        <p>Antal i korgen: </p>
+        <label>0</label>
         <input type="button" value="Lägg i" onclick="SaveItem()">
         <input type="button" value="Lägg tillbaka" onclick="RemoveItem()">
       </fieldset>
@@ -22,16 +23,18 @@
     {{> footer}}
     <script>
 
-      //call function to check for browser support and show table for shopping
+      const label = document.querySelector('label');
+
+      //call function to show table for shopping
       window.load=doShowAll(),showInput();
 
-      //populate input with amount
+      //function for populate label with amount
       function showInput() {
         //check if item exists
         if (localStorage.getItem("{{pageTitle}}") !=null) {
-          document.forms.ShoppingList.data.value = localStorage.getItem("{{pageTitle}}");
+          label.textContent = localStorage.getItem("{{pageTitle}}");
         } else {
-          document.forms.ShoppingList.data.value = "0";
+          label.textContent = "0";
         }
       }
 
@@ -57,7 +60,7 @@
       //save or update key-value pair
       function SaveItem() {
         var name = "{{pageTitle}}";
-        var data = document.forms.ShoppingList.data.value;
+        var data = label.textContent;
         data++;
         localStorage.setItem(name, data);
         doShowAll();
@@ -67,10 +70,10 @@
       //delete an item from storage
       function RemoveItem() {
         var name = "{{pageTitle}}";
-        var data = document.forms.ShoppingList.data.value;
+        var data = label.textContent;
         data--;
         if (data < 1) {
-          document.forms.ShoppingList.data.value=localStorage.removeItem(name);
+          localStorage.removeItem(name);
         } else {
           localStorage.setItem(name, data);
         }
