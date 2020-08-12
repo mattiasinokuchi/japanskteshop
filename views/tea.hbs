@@ -12,8 +12,8 @@
       <fieldset>
         <p>Antal i korgen: </p>
         <label>0</label>
-        <input type="button" value="Lägg i" onclick="SaveItem()">
-        <input type="button" value="Lägg tillbaka" onclick="RemoveItem()">
+        <input type="button" value="Lägg i" onclick="addItem()">
+        <input type="button" value="Lägg tillbaka" onclick="removeItem()">
       </fieldset>
       <div id="items_table">
         <h2>I korgen:</h2>
@@ -26,19 +26,9 @@
       const label = document.querySelector('label');
 
       //call function to show table for shopping
-      window.load=doShowAll(),showInput();
+      window.load=doShowAll();
 
-      //function for populate label with amount
-      function showInput() {
-        //check if item exists
-        if (localStorage.getItem("{{pageTitle}}") !=null) {
-          label.textContent = localStorage.getItem("{{pageTitle}}");
-        } else {
-          label.textContent = "0";
-        }
-      }
-
-      //populate table with items
+      //populate table and label with items
       function doShowAll() {
         var key = "";
         var list = "<tr><th></th><th>Antal</th></tr>\n";
@@ -55,20 +45,25 @@
         }
         //bind data to HTML table.
         document.getElementById('list').innerHTML = list;
+        //populate label with amount
+        if (localStorage.getItem("{{pageTitle}}") !=null) {
+          label.textContent = localStorage.getItem("{{pageTitle}}");
+        } else {
+          label.textContent = "0";
+        }
       }
 
-      //save or update key-value pair
-      function SaveItem() {
+      //function to add an item
+      function addItem() {
         var name = "{{pageTitle}}";
         var data = label.textContent;
         data++;
         localStorage.setItem(name, data);
         doShowAll();
-        showInput();
 
       }
-      //delete an item from storage
-      function RemoveItem() {
+      //function to remove an item
+      function removeItem() {
         var name = "{{pageTitle}}";
         var data = label.textContent;
         data--;
@@ -78,7 +73,6 @@
           localStorage.setItem(name, data);
         }
         doShowAll();
-        showInput();
       }
     </script>
   </body>
