@@ -67,7 +67,13 @@
       //delete an item from storage
       function RemoveItem() {
         var name = "{{pageTitle}}";
-        document.forms.ShoppingList.data.value=localStorage.removeItem(name);
+        var data = document.forms.ShoppingList.data.value;
+        data--;
+        if (data < 1) {
+          document.forms.ShoppingList.data.value=localStorage.removeItem(name);
+        } else {
+          localStorage.setItem(name, data);
+        }
         doShowAll();
         showInput();
       }
