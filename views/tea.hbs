@@ -28,7 +28,6 @@
       //populate input with amount
       function showInput() {
         //check if item exists
-        console.log(localStorage.getItem("{{pageTitle}}"));
         if (localStorage.getItem("{{pageTitle}}") !=null) {
           document.forms.ShoppingList.data.value = localStorage.getItem("{{pageTitle}}");
         } else {
@@ -59,8 +58,11 @@
       function SaveItem() {
         var name = "{{pageTitle}}";
         var data = document.forms.ShoppingList.data.value;
+        data++;
         localStorage.setItem(name, data);
         doShowAll();
+        showInput();
+
       }
       //delete an item from storage
       function RemoveItem() {
