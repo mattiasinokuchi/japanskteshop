@@ -41,21 +41,24 @@ app.get('/genmaicha', (req, res) => {
   res.render('tea.hbs', {
     pageTitle: 'Genmaicha',
     description: 'Här kommer snart en beskrivning',
-    price: 50
+    price: 50,
+    sku: 'sku_GWpdbzpAxPznoC'
   });
 });
 app.get('/macha', (req, res) => {
   res.render('tea.hbs', {
     pageTitle: 'Macha',
     description: 'Här kommer snart en till beskrivning',
-    price: 51
+    price: 50,
+    sku: 'sku_HmhHamL9uOVXgR'
   });
 });
 app.get('/sencha', (req, res) => {
   res.render('tea.hbs', {
     pageTitle: 'Sencha',
     description: 'Här kommer snart ännu en beskrivning',
-    price: 52
+    price: 50,
+    sku: 'sku_HpLT2GFKrO71mq'
   });
 });
 app.get('/checkout', (req, res) => {
