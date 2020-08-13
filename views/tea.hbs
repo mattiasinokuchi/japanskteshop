@@ -24,18 +24,18 @@
     <script>
 
       const label = document.querySelector('label');
-      var name = "{{pageTitle}}";
-      var amount = label.textContent;
-      var price = {{price}};
+      const name = "{{pageTitle}}";
+      let amount = label.textContent;
+      const price = {{price}};
 
       //call function to show table for shopping
       window.load=doShowAll();
 
       //populate table and label with items
       function doShowAll() {
-        var key = "";
-        var list = "<tr><th></th><th>Antal</th></tr>\n";
-        var i = 0;
+        let key = "";
+        let list = "<tr><th></th><th>Antal</th></tr>\n";
+        let i = 0;
         //For a more advanced feature, you can set a cap on max items in the cart.
         for (i = 0; i <= localStorage.length-1; i++) {
           key = localStorage.key(i);
