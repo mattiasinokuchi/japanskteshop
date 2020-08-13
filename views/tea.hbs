@@ -24,6 +24,9 @@
     <script>
 
       const label = document.querySelector('label');
+      var name = "{{pageTitle}}";
+      var amount = label.textContent;
+      var price = {{price}};
 
       //call function to show table for shopping
       window.load=doShowAll();
@@ -43,7 +46,7 @@
         if (list == "<tr><th></th><th>Antal</th></tr>\n") {
           list += "<tr><td><i></i></td>\n<td><i></i></td></tr>\n";
         }
-        //bind data to HTML table.
+        //bind amount to HTML table.
         document.getElementById('list').innerHTML = list;
         //populate label with amount
         if (localStorage.getItem("{{pageTitle}}") !=null) {
@@ -55,22 +58,20 @@
 
       //function to add an item
       function addItem() {
-        var name = "{{pageTitle}}";
-        var data = label.textContent;
-        data++;
-        localStorage.setItem(name, data);
+        amount++;
+        if (amount < 1) {
+          amount = 1;
+        }
+        localStorage.setItem(name, amount);
         doShowAll();
-
       }
       //function to remove an item
       function removeItem() {
-        var name = "{{pageTitle}}";
-        var data = label.textContent;
-        data--;
-        if (data < 1) {
+        amount--;
+        if (amount < 1) {
           localStorage.removeItem(name);
         } else {
-          localStorage.setItem(name, data);
+          localStorage.setItem(name, amount);
         }
         doShowAll();
       }
