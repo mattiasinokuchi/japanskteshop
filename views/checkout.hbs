@@ -40,7 +40,7 @@
           key = localStorage.key(i);
           link = '<a href="' + key + '">' + key + '</a>';
           list += "<tr><td>" + link + "</td>\n<td>"
-          + localStorage.getItem(key) + "</td></tr>\n";
+          + JSON.parse(localStorage.getItem(key))[0] + "</td></tr>\n";
         }
         //if no item exists in the cart.
         if (list == "<tr><th></th><th>Antal</th></tr>\n") {
