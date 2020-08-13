@@ -26,7 +26,7 @@
       const label = document.querySelector('label');
       const name = "{{pageTitle}}";
       const price = {{price}};
-      
+      const sku = "{{sku}}";
       let amount = label.textContent;
 
       //call function to show table for shopping
@@ -41,7 +41,7 @@
         for (i = 0; i <= localStorage.length-1; i++) {
           key = localStorage.key(i);
           list += "<tr><td>" + key + "</td>\n<td>"
-          + localStorage.getItem(key) + "</td></tr>\n";
+          + JSON.parse(localStorage.getItem(key))[0] + "</td></tr>\n";
         }
         //if no item exists in the cart.
         if (list == "<tr><th></th><th>Antal</th></tr>\n") {
@@ -51,7 +51,7 @@
         document.getElementById('list').innerHTML = list;
         //populate label with amount
         if (localStorage.getItem("{{pageTitle}}") !=null) {
-          label.textContent = localStorage.getItem("{{pageTitle}}");
+          label.textContent = JSON.parse(localStorage.getItem("{{pageTitle}}"))[0];
         } else {
           label.textContent = "0";
         }
@@ -63,7 +63,7 @@
         if (amount < 1) {
           amount = 1;
         }
-        localStorage.setItem(name, amount);
+        localStorage.setItem(name, JSON.stringify([amount, price, sku]));
         doShowAll();
       }
       //function to remove an item
@@ -72,7 +72,7 @@
         if (amount < 1) {
           localStorage.removeItem(name);
         } else {
-          localStorage.setItem(name, amount);
+          localStorage.setItem(name, JSON.stringify([amount, price, sku]));
         }
         doShowAll();
       }
