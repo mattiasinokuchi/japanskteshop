@@ -28,6 +28,8 @@
       const price = {{price}};
       const sku = "{{sku}}";
       let sumOfRow = "";
+      let sumOfItems = "";
+      let grandTotal = "";
 
       //call function to show table for shopping
       window.load=doShowAll();
@@ -60,23 +62,39 @@
       //function to add an item
       function addItem() {
         let amount = label.textContent;
+        sumOfItems = 0;
+        grandTotal = 0;
         amount++;
         if (amount < 1) {
           amount = 1;
         }
         sumOfRow = amount*price;
         localStorage.setItem(name, JSON.stringify([amount, price, sumOfRow, sku]));
+        //loop for counting items
+        for (i = 0; i <= localStorage.length-1; i++) {
+          key = localStorage.key(i);
+          sumOfItems+= parseInt(JSON.parse(localStorage.getItem(key))[0]);
+          grandTotal+= parseInt(JSON.parse(localStorage.getItem(key))[2]);
+        }
         doShowAll();
       }
       //function to remove an item
       function removeItem() {
         let amount = label.textContent;
+        sumOfItems = 0;
+        grandTotal = 0;
         amount--;
         if (amount < 1) {
           localStorage.removeItem(name);
         } else {
           sumOfRow = amount*price;
           localStorage.setItem(name, JSON.stringify([amount, price, sumOfRow, sku]));
+        }
+        //loop for counting items
+        for (i = 0; i <= localStorage.length-1; i++) {
+          key = localStorage.key(i);
+          sumOfItems+= parseInt(JSON.parse(localStorage.getItem(key))[0]);
+          grandTotal+= parseInt(JSON.parse(localStorage.getItem(key))[2]);
         }
         doShowAll();
       }
