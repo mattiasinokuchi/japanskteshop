@@ -27,6 +27,7 @@
       const name = "{{pageTitle}}";
       const price = {{price}};
       const sku = "{{sku}}";
+      let sumOfRow = "";
 
       //call function to show table for shopping
       window.load=doShowAll();
@@ -63,7 +64,8 @@
         if (amount < 1) {
           amount = 1;
         }
-        localStorage.setItem(name, JSON.stringify([amount, price, sku]));
+        sumOfRow = amount*price;
+        localStorage.setItem(name, JSON.stringify([amount, price, sumOfRow, sku]));
         doShowAll();
       }
       //function to remove an item
@@ -73,7 +75,8 @@
         if (amount < 1) {
           localStorage.removeItem(name);
         } else {
-          localStorage.setItem(name, JSON.stringify([amount, price, sku]));
+          sumOfRow = amount*price;
+          localStorage.setItem(name, JSON.stringify([amount, price, sumOfRow, sku]));
         }
         doShowAll();
       }
