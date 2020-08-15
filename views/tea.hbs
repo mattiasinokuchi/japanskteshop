@@ -11,19 +11,20 @@
     <form name="ShoppingList">
       <fieldset>
         <p>Antal i korgen: </p>
-        <label>0</label>
+        <label id="amountLabel">0</label>
         <input type="button" value="Lägg i" onclick="addItem()">
         <input type="button" value="Lägg tillbaka" onclick="removeItem()">
       </fieldset>
       <div id="items_table">
         <h2>I korgen:</h2>
         <table id="list"></table>
+        <label id="sumOfItems">0</label>
       </div>
     </form>
     {{> footer}}
     <script>
 
-      const label = document.querySelector('label');
+      const label = document.querySelector("#amountLabel");
       const name = "{{pageTitle}}";
       const price = {{price}};
       const sku = "{{sku}}";
