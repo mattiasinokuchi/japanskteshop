@@ -17,7 +17,6 @@
       </fieldset>
       <div id="items_table">
         <h2>I korgen:</h2>
-        <table id="list"></table>
         <label id="sumOfItems">0</label>
       </div>
     </form>
@@ -25,6 +24,7 @@
     <script>
 
       const amountLabel = document.querySelector("#amountLabel");
+      const sumOfItemsLabel = document.querySelector("#sumOfItemsLabel");
       const name = "{{pageTitle}}";
       const price = {{price}};
       const sku = "{{sku}}";
@@ -37,21 +37,6 @@
 
       //populate table and label with items
       function doShowAll() {
-        let key = "";
-        let list = "<tr><th></th><th>Antal</th></tr>\n";
-        let i = 0;
-        //For a more advanced feature, you can set a cap on max items in the cart.
-        for (i = 0; i <= localStorage.length-1; i++) {
-          key = localStorage.key(i);
-          list += "<tr><td>" + key + "</td>\n<td>"
-          + JSON.parse(localStorage.getItem(key))[0] + "</td></tr>\n";
-        }
-        //if no item exists in the cart.
-        if (list == "<tr><th></th><th>Antal</th></tr>\n") {
-          list += "<tr><td><i></i></td>\n<td><i></i></td></tr>\n";
-        }
-        //bind amount to HTML table.
-        document.getElementById('list').innerHTML = list;
         //populate label with amount
         if (localStorage.getItem("{{pageTitle}}") !=null) {
           amountLabel.textContent = JSON.parse(localStorage.getItem("{{pageTitle}}"))[0];
