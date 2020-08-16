@@ -24,7 +24,7 @@
     {{> footer}}
     <script>
 
-      const label = document.querySelector("#amountLabel");
+      const amountLabel = document.querySelector("#amountLabel");
       const name = "{{pageTitle}}";
       const price = {{price}};
       const sku = "{{sku}}";
@@ -54,15 +54,15 @@
         document.getElementById('list').innerHTML = list;
         //populate label with amount
         if (localStorage.getItem("{{pageTitle}}") !=null) {
-          label.textContent = JSON.parse(localStorage.getItem("{{pageTitle}}"))[0];
+          amountLabel.textContent = JSON.parse(localStorage.getItem("{{pageTitle}}"))[0];
         } else {
-          label.textContent = "0";
+          amountLabel.textContent = "0";
         }
       }
 
       //function to add an item
       function addItem() {
-        let amount = label.textContent;
+        let amount = amountLabel.textContent;
         sumOfItems = 0;
         grandTotal = 0;
         amount++;
@@ -81,7 +81,7 @@
       }
       //function to remove an item
       function removeItem() {
-        let amount = label.textContent;
+        let amount = amountLabel.textContent;
         sumOfItems = 0;
         grandTotal = 0;
         amount--;
