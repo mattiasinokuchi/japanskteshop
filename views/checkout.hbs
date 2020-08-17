@@ -21,20 +21,24 @@
 
       // Publishable key from API keys in the Stripe Dashboard
       var PUBLISHABLE_KEY = "pk_live_QAeLzztCGto6VeIqPuUCGcF100c8v0Efqb";
+
       // Replace with the domain you want your users to be redirected back to after payment
       var DOMAIN = location.href.replace(/[^/]*$/, "");
+
       // SKU created in the Stripe Dashboard
       var SKU_ID = "sku_GWpdbzpAxPznoC";
 
       var stripe = Stripe(PUBLISHABLE_KEY);
 
       var buyButton = document.getElementById("buyButton");
+
       // Array for Stripe checkout
       var itemsArray = [];
 
-      //call functions for table and button
+      // Call functions to populate table and button
       window.load=doShowAll(), showGrandTotal(), createItemsArray();
-      //populate table with items
+
+      // Populate table with items
       function doShowAll() {
         var key = "";
         var link ="";
@@ -70,7 +74,8 @@
         //bind amount to HTML table.
         document.getElementById('list').innerHTML = list;
       }
-      //clear the local storage,
+
+      // Clear the local storage,
       function ClearAll() {
         localStorage.clear();
         doShowAll();
@@ -78,7 +83,7 @@
         createItemsArray();
       }
 
-      //populate buyButton
+      // Populate buyButton
       function showGrandTotal() {
         grandTotal = 0;
         //populate label with amount
@@ -93,7 +98,7 @@
         }
       }
 
-      //create items array for Stripe checkout
+      // Create items array for Stripe checkout
       function createItemsArray() {
         var i = 0;
         for (i = 0; i <= localStorage.length-1; i++) {
@@ -114,14 +119,13 @@
         }
       };
 
+      // Make the call to Stripe.js to redirect to the checkout page
       buyButton.addEventListener("click", function() {
         var quantity = 0;
 
-        // Make the call to Stripe.js to redirect to the checkout page
-        // with the current quantity
         stripe
           .redirectToCheckout({
-            items: [{ sku: SKU_ID, quantity: quantity }],
+            items: itemsArray,
             successUrl:
               DOMAIN + "/success.html?session_id={CHECKOUT_SESSION_ID}",
             cancelUrl: DOMAIN + "/canceled.html"
