@@ -33,7 +33,12 @@
       function doShowAll() {
         var key = "";
         var link ="";
-        var list = "<tr><th></th><th>Antal</th><th>Styckpris</th><th>Radsumma</th></tr>\n";
+        var list = "<tr>\
+                      <th></th>\
+                      <th>Antal</th>\
+                      <th>Styckpris</th>\
+                      <th>Radsumma</th>\
+                    </tr>\n";
         var i = 0;
         //For a more advanced feature, you can set a cap on max items in the cart.
         for (i = 0; i <= localStorage.length-1; i++) {
@@ -45,8 +50,17 @@
           + JSON.parse(localStorage.getItem(key))[2] + "</td></tr>\n";
         }
         //if no item exists in the cart.
-        if (list == "<tr><th></th><th>Antal</th><th>Styckpris</th><th>Radsumma</th></tr>\n") {
-          list += "<tr><td><i></i></td>\n<td><i></i></td><td><i></i></td></tr>\n";
+        if (list == "<tr>\
+                      <th></th>\
+                      <th>Antal</th>\
+                      <th>Styckpris</th>\
+                      <th>Radsumma</th>\
+                    </tr>\n") {
+          list += "<tr>\
+                    <td><i></i></td>\n\
+                    <td><i></i></td>\
+                    <td><i></i></td>\
+                  </tr>\n";
         }
         //bind amount to HTML table.
         document.getElementById('list').innerHTML = list;
