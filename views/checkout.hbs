@@ -8,19 +8,16 @@
   </head>
   <body>
     {{> header}}
-    <form name="ShoppingList">
-      <div id="items_table">
+    <fieldset>
+      <legend>I korgen</legend>
         <table id="list"></table>
         <input type="button" value="Töm korgen" onclick="ClearAll()">
-      </div>
-    </form>
+        <button id="buyButton">
+          Köp för <span id="total">0</span> kr
+        </button>
+    </fieldset>
 
     <!-- copied from Stripe -->
-    <section class="container">
-      <button id="buyButton">
-        Köp för <span id="total">0</span> kr
-      </button>
-    </section>
     {{> footer}}
     <script>
       //show table for items

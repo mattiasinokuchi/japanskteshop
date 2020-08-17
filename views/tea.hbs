@@ -10,9 +10,9 @@
     <p>Pris {{price}} kr per förpackning</p>
     <form name="ShoppingList">
       <fieldset>
-        <legend>I korgen</legend>
-        <label>Antal: </label>
-        <label id="amountLabel">0</label>
+        <label>
+          Antal i korgen: <span id="amountLabel">0</span>
+        </label>
         <br>
         <input type="button" value="Lägg i fler" onclick="addItem()">
         <input type="button" value="Lägg tillbaka" onclick="removeItem()">
