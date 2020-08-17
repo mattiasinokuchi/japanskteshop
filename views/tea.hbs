@@ -8,22 +8,20 @@
     {{> header}}
     <p>{{description}}</p>
     <p>Pris {{price}} kr per förpackning</p>
-    <form name="ShoppingList">
-      <fieldset>
-        <label>
-          Antal i korgen: <span id="amountLabel">0</span>
-        </label>
-        <br>
-        <input type="button" value="Lägg i fler" onclick="addItem()">
-        <input type="button" value="Lägg tillbaka" onclick="removeItem()">
-      </fieldset>
-      <p id="item_summary">
-        <label>Du har totalt
-          <span id="sumOfItemsLabel">0</span> saker för
-          <span id="grandTotalLabel">0</span> kr i korgen
-        </label>
-      </p>
-    </form>
+    <fieldset>
+      <label>Antal i korgen:
+        <span id="amountLabel">0</span>
+      </label>
+      <br>
+      <input type="button" value="Lägg i fler" onclick="addItem()">
+      <input type="button" value="Lägg tillbaka" onclick="removeItem()">
+    </fieldset>
+    <p id="item_summary">
+      <label>Du har totalt
+        <span id="sumOfItemsLabel">0</span> saker för
+        <span id="grandTotalLabel">0</span> kr i korgen
+      </label>
+    </p>
     {{> footer}}
     <script>
 
