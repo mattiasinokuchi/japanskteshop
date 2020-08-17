@@ -12,7 +12,7 @@
       <legend>I korgen</legend>
         <table id="list"></table>
         <input type="button" value="Töm korgen" onclick="ClearAll()">
-        <button id="buyButton" onclick="buyItems()">
+        <button id="buyButton">
           Köp för <span id="total">0</span> kr
         </button>
     </fieldset>
@@ -24,6 +24,9 @@
 
       // Replace with the domain you want your users to be redirected back to after payment
       var DOMAIN = location.href.replace(/[^/]*$/, "");
+
+      // SKU created in the Stripe Dashboard
+      var SKU_ID = "sku_GWpdbzpAxPznoC";
 
       var stripe = Stripe(PUBLISHABLE_KEY);
 
@@ -108,18 +111,6 @@
         }
       }
 
-      // Make the call to Stripe.js to redirect to the checkout page
-      function buyItems {
-        stripe
-          .redirectToCheckout({
-            items: itemsArray,
-            successUrl:
-              DOMAIN + "/success.html?session_id={CHECKOUT_SESSION_ID}",
-            cancelUrl: DOMAIN + "/canceled.html"
-          })
-          .then(handleResult);
-      }
-
       // Handle any errors from Checkout
       var handleResult = function(result) {
         if (result.error) {
@@ -128,6 +119,19 @@
         }
       };
 
+      // Make the call to Stripe.js to redirect to the checkout page
+      buyButton.addEventListener("click", function() {
+        var quantity = 0;
+
+        stripe
+          .redirectToCheckout({
+            items: itemsArray,
+            successUrl:
+              DOMAIN + "/success.html?session_id={CHECKOUT_SESSION_ID}",
+            cancelUrl: DOMAIN + "/canceled.html"
+          })
+          .then(handleResult);
+      });
     </script>
   </body>
 </html>
