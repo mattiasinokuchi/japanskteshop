@@ -46,15 +46,15 @@
         sumOfItems = 0;
         grandTotal = 0;
         //populate label with amount
-        if (localStorage.getItem("{{pageTitle}}") !=null) {
-          amountLabel.textContent = JSON.parse(localStorage.getItem("{{pageTitle}}"))[0];
+        if (sessionStorage.getItem("{{pageTitle}}") !=null) {
+          amountLabel.textContent = JSON.parse(sessionStorage.getItem("{{pageTitle}}"))[0];
         } else {
           amountLabel.textContent = "0";
         }
-        for (i = 0; i <= localStorage.length-1; i++) {
-          key = localStorage.key(i);
-          sumOfItems+= parseInt(JSON.parse(localStorage.getItem(key))[0]);
-          grandTotal+= parseInt(JSON.parse(localStorage.getItem(key))[2]);
+        for (i = 0; i <= sessionStorage.length-1; i++) {
+          key = sessionStorage.key(i);
+          sumOfItems+= parseInt(JSON.parse(sessionStorage.getItem(key))[0]);
+          grandTotal+= parseInt(JSON.parse(sessionStorage.getItem(key))[2]);
         }
         sumOfItemsLabel.textContent = sumOfItems;
         grandTotalLabel.textContent = grandTotal;
@@ -68,7 +68,7 @@
           amount = 1;
         }
         sumOfRow = amount*price;
-        localStorage.setItem(name, JSON.stringify([amount, price, sumOfRow, sku]));
+        sessionStorage.setItem(name, JSON.stringify([amount, price, sumOfRow, sku]));
         //loop for counting items
         doShowAll();
       }
@@ -78,10 +78,10 @@
         let amount = amountLabel.textContent;
         amount--;
         if (amount < 1) {
-          localStorage.removeItem(name);
+          sessionStorage.removeItem(name);
         } else {
           sumOfRow = amount*price;
-          localStorage.setItem(name, JSON.stringify([amount, price, sumOfRow, sku]));
+          sessionStorage.setItem(name, JSON.stringify([amount, price, sumOfRow, sku]));
         }
         doShowAll();
       }

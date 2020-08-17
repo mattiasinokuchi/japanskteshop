@@ -50,13 +50,13 @@
                     </tr>\n";
         var i = 0;
         //For a more advanced feature, you can set a cap on max items in the cart.
-        for (i = 0; i <= localStorage.length-1; i++) {
-          key = localStorage.key(i);
+        for (i = 0; i <= sessionStorage.length-1; i++) {
+          key = sessionStorage.key(i);
           link = '<a href="' + key + '">' + key + '</a>';
           list += "<tr><td>" + link + "</td>\n<td>"
-          + JSON.parse(localStorage.getItem(key))[0] + "</td><td>"
-          + JSON.parse(localStorage.getItem(key))[1] + "</td><td>"
-          + JSON.parse(localStorage.getItem(key))[2] + "</td></tr>";
+          + JSON.parse(sessionStorage.getItem(key))[0] + "</td><td>"
+          + JSON.parse(sessionStorage.getItem(key))[1] + "</td><td>"
+          + JSON.parse(sessionStorage.getItem(key))[2] + "</td></tr>";
         }
         //if no item exists in the cart.
         if (list == "<tr>\
@@ -75,9 +75,9 @@
         document.getElementById('list').innerHTML = list;
       }
 
-      // Clear the local storage,
+      // Clear the session storage,
       function ClearAll() {
-        localStorage.clear();
+        sessionStorage.clear();
         doShowAll();
         showGrandTotal();
         createItemsArray();
@@ -87,12 +87,12 @@
       function showGrandTotal() {
         grandTotal = 0;
         //populate label with amount
-        if (localStorage.length === 0) {
+        if (sessionStorage.length === 0) {
           document.getElementById("total").textContent = "0";
         } else {
-          for (i = 0; i <= localStorage.length-1; i++) {
-            key = localStorage.key(i);
-            grandTotal+= parseInt(JSON.parse(localStorage.getItem(key))[2]);
+          for (i = 0; i <= sessionStorage.length-1; i++) {
+            key = sessionStorage.key(i);
+            grandTotal+= parseInt(JSON.parse(sessionStorage.getItem(key))[2]);
           }
           document.getElementById("total").textContent = grandTotal;
         }
@@ -101,11 +101,11 @@
       // Create items array for Stripe checkout
       function createItemsArray() {
         var i = 0;
-        for (i = 0; i <= localStorage.length-1; i++) {
-          key = localStorage.key(i);
+        for (i = 0; i <= sessionStorage.length-1; i++) {
+          key = sessionStorage.key(i);
           itemsArray.push(
-            { sku: JSON.parse(localStorage.getItem(key))[3],
-              quantity: JSON.parse(localStorage.getItem(key))[0]
+            { sku: JSON.parse(sessionStorage.getItem(key))[3],
+              quantity: JSON.parse(sessionStorage.getItem(key))[0]
             }
           );
         }
