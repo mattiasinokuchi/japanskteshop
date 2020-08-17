@@ -17,10 +17,6 @@
 
     <!-- copied from Stripe -->
     <section class="container">
-      <div class="quantity-setter">
-        <input type="number" id="quantity-input" min="1" value="1" />
-        <button class="increment-btn" id="add">Lägg i korgen</button>
-      </div>
       <button id="buyButton">
         Köp för <span id="total">0</span> kr
       </button>
@@ -83,24 +79,6 @@
 
       var buyButton = document.getElementById("buyButton");
 
-      //function for update quantity
-      var updateQuantity = function(evt) {
-        if (evt && evt.type === "keypress" && evt.keyCode !== 13) {
-          return;
-        }
-        var inputEl = document.getElementById("quantity-input");
-        var currentQuantity = parseInt(inputEl.value);
-        var quantity = currentQuantity + 1;
-        inputEl.value = quantity;
-        document.getElementById("total").textContent = quantity;
-      };
-
-      Array.from(document.getElementsByClassName("increment-btn")).forEach(
-        element => {
-          element.addEventListener("click", updateQuantity);
-        }
-      );
-
       //function to populate buyButton
       function showGrandTotal() {
         grandTotal = 0;
@@ -125,9 +103,7 @@
       };
 
       buyButton.addEventListener("click", function() {
-        var quantity = parseInt(
-          document.getElementById("quantity-input").value
-        );
+        var quantity = 0;
 
         // Make the call to Stripe.js to redirect to the checkout page
         // with the current quantity
