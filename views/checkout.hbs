@@ -21,14 +21,14 @@
         <input type="number" id="quantity-input" min="1" value="1" />
         <button class="increment-btn" id="add">Lägg i korgen</button>
       </div>
-      <button id="basic-button">
-        Köp för <span id="total">5</span> kr
+      <button id="buyButton">
+        Köp för <span id="total">0</span> kr
       </button>
     </section>
     {{> footer}}
     <script>
       //show table for items
-      window.load=doShowAll();
+      window.load=doShowAll(), showGrandTotal();
       //populate table with items
       function doShowAll() {
         var key = "";
@@ -69,6 +69,7 @@
       function ClearAll() {
         localStorage.clear();
         doShowAll();
+        showGrandTotal();
       }
 
       // Publishable key from API keys in the Stripe Dashboard
@@ -80,7 +81,8 @@
 
       var stripe = Stripe(PUBLISHABLE_KEY);
 
-      var basicButton = document.getElementById("basic-button");
+      var buyButton = document.getElementById("buyButton");
+
       //function for update quantity
       var updateQuantity = function(evt) {
         if (evt && evt.type === "keypress" && evt.keyCode !== 13) {
@@ -99,6 +101,21 @@
         }
       );
 
+      //function to populate buyButton
+      function showGrandTotal() {
+        grandTotal = 0;
+        //populate label with amount
+        if (localStorage.length === 0) {
+          document.getElementById("total").textContent = "0";
+        } else {
+          for (i = 0; i <= localStorage.length-1; i++) {
+            key = localStorage.key(i);
+            grandTotal+= parseInt(JSON.parse(localStorage.getItem(key))[2]);
+          }
+          document.getElementById("total").textContent = grandTotal;
+        }
+      }
+
       // Handle any errors from Checkout
       var handleResult = function(result) {
         if (result.error) {
@@ -107,14 +124,14 @@
         }
       };
 
-      basicButton.addEventListener("click", function() {
+      buyButton.addEventListener("click", function() {
         var quantity = parseInt(
           document.getElementById("quantity-input").value
         );
 
         // Make the call to Stripe.js to redirect to the checkout page
         // with the current quantity
-      stripe
+        stripe
           .redirectToCheckout({
             items: [{ sku: SKU_ID, quantity: quantity }],
             successUrl:
