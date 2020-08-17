@@ -10,21 +10,27 @@
     <p>Pris {{price}} kr per förpackning</p>
     <form name="ShoppingList">
       <fieldset>
-        <p>Antal i korgen: </p>
+        <legend>I korgen</legend>
+        <label>Antal: </label>
         <label id="amountLabel">0</label>
-        <input type="button" value="Lägg i" onclick="addItem()">
+        <br>
+        <input type="button" value="Lägg i fler" onclick="addItem()">
         <input type="button" value="Lägg tillbaka" onclick="removeItem()">
       </fieldset>
-      <div id="items_table">
-        <h2>I korgen:</h2>
+      <p id="item_summary">
+        <label>Du har totalt</label>
         <label id="sumOfItemsLabel">0</label>
-      </div>
+        <label> saker för </label>
+        <label id="grandTotalLabel">0</label>
+        <label> kr i korgen</label>
+      </p>
     </form>
     {{> footer}}
     <script>
 
       const amountLabel = document.querySelector("#amountLabel");
       const sumOfItemsLabel = document.querySelector("#sumOfItemsLabel");
+      const grandTotalLabel = document.querySelector("#grandTotalLabel");
       const name = "{{pageTitle}}";
       const price = {{price}};
       const sku = "{{sku}}";
@@ -51,6 +57,7 @@
           grandTotal+= parseInt(JSON.parse(localStorage.getItem(key))[2]);
         }
         sumOfItemsLabel.textContent = sumOfItems;
+        grandTotalLabel.textContent = grandTotal;
       }
 
       //function to add an item
