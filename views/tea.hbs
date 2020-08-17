@@ -17,7 +17,7 @@
       </fieldset>
       <div id="items_table">
         <h2>I korgen:</h2>
-        <label id="sumOfItems">0</label>
+        <label id="sumOfItemsLabel">0</label>
       </div>
     </form>
     {{> footer}}
@@ -32,24 +32,30 @@
       let sumOfItems = "";
       let grandTotal = "";
 
-      //call function to show table for shopping
+      //call function to populate labels
       window.load=doShowAll();
 
-      //populate table and label with items
+      //function to populate label
       function doShowAll() {
+        sumOfItems = 0;
+        grandTotal = 0;
         //populate label with amount
         if (localStorage.getItem("{{pageTitle}}") !=null) {
           amountLabel.textContent = JSON.parse(localStorage.getItem("{{pageTitle}}"))[0];
         } else {
           amountLabel.textContent = "0";
         }
+        for (i = 0; i <= localStorage.length-1; i++) {
+          key = localStorage.key(i);
+          sumOfItems+= parseInt(JSON.parse(localStorage.getItem(key))[0]);
+          grandTotal+= parseInt(JSON.parse(localStorage.getItem(key))[2]);
+        }
+        sumOfItemsLabel.textContent = sumOfItems;
       }
 
       //function to add an item
       function addItem() {
         let amount = amountLabel.textContent;
-        sumOfItems = 0;
-        grandTotal = 0;
         amount++;
         if (amount < 1) {
           amount = 1;
@@ -57,30 +63,17 @@
         sumOfRow = amount*price;
         localStorage.setItem(name, JSON.stringify([amount, price, sumOfRow, sku]));
         //loop for counting items
-        for (i = 0; i <= localStorage.length-1; i++) {
-          key = localStorage.key(i);
-          sumOfItems+= parseInt(JSON.parse(localStorage.getItem(key))[0]);
-          grandTotal+= parseInt(JSON.parse(localStorage.getItem(key))[2]);
-        }
         doShowAll();
       }
       //function to remove an item
       function removeItem() {
         let amount = amountLabel.textContent;
-        sumOfItems = 0;
-        grandTotal = 0;
         amount--;
         if (amount < 1) {
           localStorage.removeItem(name);
         } else {
           sumOfRow = amount*price;
           localStorage.setItem(name, JSON.stringify([amount, price, sumOfRow, sku]));
-        }
-        //loop for counting items
-        for (i = 0; i <= localStorage.length-1; i++) {
-          key = localStorage.key(i);
-          sumOfItems+= parseInt(JSON.parse(localStorage.getItem(key))[0]);
-          grandTotal+= parseInt(JSON.parse(localStorage.getItem(key))[2]);
         }
         doShowAll();
       }
