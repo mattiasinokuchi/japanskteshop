@@ -17,8 +17,8 @@
           <span id="amountLabel">0</span>
         </label>
         <br>
-        <button onclick="addItem()">Lägg i fler</button>
-        <button onclick="removeItem()">Lägg tillbaka</button>
+        <button id="add">Lägg i fler</button>
+        <button id="remove">Lägg tillbaka</button>
       </fieldset>
       <p id="item_summary">
         <label>Du har totalt
@@ -35,6 +35,8 @@
       const amountLabel = document.querySelector("#amountLabel");
       const sumOfItemsLabel = document.querySelector("#sumOfItemsLabel");
       const grandTotalLabel = document.querySelector("#grandTotalLabel");
+      const addButton = document.querySelector("#add");
+      const removeButton = document.querySelector("#remove");
       const name = "{{pageTitle}}";
       const price = {{price}};
       const sku = "{{sku}}";
@@ -44,6 +46,9 @@
 
       //call function to populate labels
       window.load=doShowAll();
+
+      addButton.onclick = addItem;
+      removeButton.onclick = removeItem;
 
       //function to populate label
       function doShowAll() {
@@ -89,6 +94,7 @@
         }
         doShowAll();
       }
+
 
     </script>
   </body>
