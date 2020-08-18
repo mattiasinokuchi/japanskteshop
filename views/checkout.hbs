@@ -25,9 +25,6 @@
       // Replace with the domain you want your users to be redirected back to after payment
       var DOMAIN = location.href.replace(/[^/]*$/, "");
 
-      // SKU created in the Stripe Dashboard
-      var SKU_ID = "sku_GWpdbzpAxPznoC";
-
       var stripe = Stripe(PUBLISHABLE_KEY);
 
       var buyButton = document.getElementById("buyButton");
