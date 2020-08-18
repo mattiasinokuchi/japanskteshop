@@ -47,19 +47,20 @@
       //call function to populate labels
       window.load=doShowAll();
 
-      addButton.onclick = addItem;
-      removeButton.onclick = removeItem;
+      addButton.onclick = addOrRemoveItem;
+      removeButton.onclick = addOrRemoveItem;
 
-      //function to populate label
+      // Set labels
       function doShowAll() {
         sumOfItems = 0;
         grandTotal = 0;
-        //populate label with amount
+        // Set amount label
         if (sessionStorage.getItem("{{pageTitle}}") !=null) {
           amountLabel.textContent = JSON.parse(sessionStorage.getItem("{{pageTitle}}"))[0];
         } else {
           amountLabel.textContent = "0";
         }
+        // Count and set items and grand total
         for (i = 0; i <= sessionStorage.length-1; i++) {
           key = sessionStorage.key(i);
           sumOfItems+= parseInt(JSON.parse(sessionStorage.getItem(key))[0]);
@@ -69,32 +70,23 @@
         grandTotalLabel.textContent = grandTotal;
       }
 
-      //function to add an item
-      function addItem() {
+      // Add or remove an item
+      function addOrRemoveItem(e) {
         let amount = amountLabel.textContent;
-        amount++;
-        if (amount < 1) {
-          amount = 1;
+        if (e.target.id === "add") {
+          amount++;
+        } else if (e.target.id === "remove") {
+          amount--;
         }
-        sumOfRow = amount*price;
-        sessionStorage.setItem(name, JSON.stringify([amount, price, sumOfRow, sku]));
-        //loop for counting items
-        doShowAll();
-      }
-
-      //function to remove an item
-      function removeItem() {
-        let amount = amountLabel.textContent;
-        amount--;
         if (amount < 1) {
           sessionStorage.removeItem(name);
         } else {
           sumOfRow = amount*price;
           sessionStorage.setItem(name, JSON.stringify([amount, price, sumOfRow, sku]));
         }
+        //loop for counting items
         doShowAll();
       }
-
 
     </script>
   </body>
