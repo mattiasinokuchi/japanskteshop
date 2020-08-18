@@ -11,8 +11,8 @@
     <fieldset>
       <legend>I korgen</legend>
         <table id="list"></table>
-        <button onclick="ClearAll()">Töm korgen</button>
-        <button id="buyButton" onclick="buyItems()">
+        <button id="clear">Töm korgen</button>
+        <button id="buy">
           Köp för <span id="total">0</span> kr
         </button>
     </fieldset>
@@ -21,19 +21,18 @@
 
       // Publishable key from API keys in the Stripe Dashboard
       var PUBLISHABLE_KEY = "pk_live_QAeLzztCGto6VeIqPuUCGcF100c8v0Efqb";
-
       // Replace with the domain you want your users to be redirected back to after payment
       var DOMAIN = location.href.replace(/[^/]*$/, "");
-
       var stripe = Stripe(PUBLISHABLE_KEY);
-
-      var buyButton = document.getElementById("buyButton");
-
+      const clearButton = document.querySelector("#clear");
+      const buyButton = document.querySelector("#buy");
       // Array for Stripe checkout
       var itemsArray = [];
 
       // Call functions to populate table and button
       window.load=listItems(), showGrandTotal(), createItemsArray();
+      clearButton.onclick = ClearAll;
+      buyButton.onclick = buyItems;
 
       // Populate table with items
       function listItems() {
