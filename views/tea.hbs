@@ -5,13 +5,16 @@
     <title>{{pageTitle}}</title>
   </head>
   <body>
-    {{> header}}
-    <p>{{description}}</p>
-    <p>Pris {{price}} kr per förpackning</p>
-    <form name="ShoppingList">
+    <header>
+      {{> header}}
+    </header>
+    <main>
+      <p>{{description}}</p>
+      <p>Pris {{price}} kr per förpackning</p>
       <fieldset>
         <label>
-          Antal i korgen: <span id="amountLabel">0</span>
+          Antal i korgen:
+          <span id="amountLabel">0</span>
         </label>
         <br>
         <button onclick="addItem()">Lägg i fler</button>
@@ -23,8 +26,10 @@
           <span id="grandTotalLabel">0</span> kr i korgen
         </label>
       </p>
-    </form>
-    {{> footer}}
+    </main>
+    <footer>
+      {{> footer}}
+    </footer>
     <script>
 
       const amountLabel = document.querySelector("#amountLabel");
