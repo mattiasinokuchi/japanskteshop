@@ -12,7 +12,7 @@
       <legend>I korgen</legend>
         <table id="list"></table>
         <input type="button" value="Töm korgen" onclick="ClearAll()">
-        <button id="buyButton">
+        <button id="buyButton" onclick="buyItems">
           Köp för <span id="total">0</span> kr
         </button>
     </fieldset>
@@ -114,21 +114,18 @@
           var displayError = document.getElementById("error-message");
           displayError.textContent = result.error.message;
         }
-      };
+      }
 
       // Make the call to Stripe.js to redirect to the checkout page
-      buyButton.addEventListener("click", function() {
-        var quantity = 0;
-
+      function buyItems() {
         stripe
           .redirectToCheckout({
             items: itemsArray,
-            successUrl:
-              DOMAIN + "/success.html?session_id={CHECKOUT_SESSION_ID}",
+            successUrl: DOMAIN + "/success.html?session_id={CHECKOUT_SESSION_ID}",
             cancelUrl: DOMAIN + "/canceled.html"
           })
           .then(handleResult);
-      });
+          
     </script>
   </body>
 </html>
