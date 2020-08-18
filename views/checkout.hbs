@@ -33,10 +33,10 @@
       var itemsArray = [];
 
       // Call functions to populate table and button
-      window.load=doShowAll(), showGrandTotal(), createItemsArray();
+      window.load=listItems(), showGrandTotal(), createItemsArray();
 
       // Populate table with items
-      function doShowAll() {
+      function listItems() {
         var key = "";
         var link ="";
         var list = "<tr>\
@@ -75,7 +75,7 @@
       // Clear the session storage,
       function ClearAll() {
         sessionStorage.clear();
-        doShowAll();
+        listItems();
         showGrandTotal();
         createItemsArray();
       }

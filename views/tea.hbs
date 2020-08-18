@@ -45,13 +45,13 @@
       let grandTotal = "";
 
       //call function to populate labels
-      window.load=doShowAll();
+      window.load=listItems();
 
       addButton.onclick = addOrRemoveItem;
       removeButton.onclick = addOrRemoveItem;
 
-      // Set labels
-      function doShowAll() {
+      // Items inventory
+      function listItems() {
         sumOfItems = 0;
         grandTotal = 0;
         // Set amount label
@@ -84,8 +84,7 @@
           sumOfRow = amount*price;
           sessionStorage.setItem(name, JSON.stringify([amount, price, sumOfRow, sku]));
         }
-        //loop for counting items
-        doShowAll();
+        listItems();
       }
 
     </script>
