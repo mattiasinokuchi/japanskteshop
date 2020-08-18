@@ -118,14 +118,13 @@
 
       // Make the call to Stripe.js to redirect to the checkout page
       function buyItems() {
-        stripe
-          .redirectToCheckout({
-            items: itemsArray,
-            successUrl: DOMAIN + "/success.html?session_id={CHECKOUT_SESSION_ID}",
-            cancelUrl: DOMAIN + "/canceled.html"
-          })
-          .then(handleResult);
-          
+        stripe.redirectToCheckout({
+          items: itemsArray,
+          successUrl: DOMAIN + "/success.html?session_id={CHECKOUT_SESSION_ID}",
+          cancelUrl: DOMAIN + "/canceled.html"
+        }).then(handleResult);
+      }
+      
     </script>
   </body>
 </html>
