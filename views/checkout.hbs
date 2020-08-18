@@ -12,7 +12,7 @@
       <legend>I korgen</legend>
         <table id="list"></table>
         <input type="button" value="Töm korgen" onclick="ClearAll()">
-        <button id="buyButton" onclick="buyItems">
+        <button id="buyButton" onclick="buyItems()">
           Köp för <span id="total">0</span> kr
         </button>
     </fieldset>
@@ -124,7 +124,7 @@
           cancelUrl: DOMAIN + "/canceled.html"
         }).then(handleResult);
       }
-      
+
     </script>
   </body>
 </html>
