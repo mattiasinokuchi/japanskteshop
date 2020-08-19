@@ -55,8 +55,10 @@
         // Set amount label
         if (sessionStorage.getItem("{{pageTitle}}") !=null) {
           amountLabel.textContent = JSON.parse(sessionStorage.getItem("{{pageTitle}}"))[0];
+          removeButton.disabled = false;
         } else {
           amountLabel.textContent = "0";
+          removeButton.disabled = true;
         }
         // Count and set items and grand total
         for (i = 0; i <= sessionStorage.length-1; i++) {
@@ -71,10 +73,15 @@
       // Add or remove an item
       function addOrRemoveItem(e) {
         let amount = amountLabel.textContent;
-        if (e.target.id === "add") {
+        if (e.target.id === "add" && amount < 5) {
           amount++;
-        } else if (e.target.id === "remove") {
+        }
+        if (e.target.id === "remove" && amount > 0) {
           amount--;
+          addButton.disabled = false;
+        }
+        if (amount > 4) {
+          addButton.disabled = true;
         }
         if (amount < 1) {
           sessionStorage.removeItem(name);
