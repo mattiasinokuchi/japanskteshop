@@ -99,9 +99,9 @@
       }
 
       // Handle any errors from Checkout
-      var handleResult = function(result) {
+      const handleResult = function(result) {
         if (result.error) {
-          var displayError = document.getElementById("error-message");
+          const displayError = document.getElementById("error-message");
           displayError.textContent = result.error.message;
         }
       }
