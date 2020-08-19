@@ -26,32 +26,30 @@
     <script>
 
       // Publishable key from API keys in the Stripe Dashboard
-      var PUBLISHABLE_KEY = "pk_live_QAeLzztCGto6VeIqPuUCGcF100c8v0Efqb";
+      const PUBLISHABLE_KEY = "pk_live_QAeLzztCGto6VeIqPuUCGcF100c8v0Efqb";
       // Replace with the domain you want your users to be redirected back to after payment
-      var DOMAIN = location.href.replace(/[^/]*$/, "");
-      var stripe = Stripe(PUBLISHABLE_KEY);
+      const DOMAIN = location.href.replace(/[^/]*$/, "");
+      const stripe = Stripe(PUBLISHABLE_KEY);
       const clearButton = document.querySelector("#clear");
       const buyButton = document.querySelector("#buy");
       // Array for Stripe checkout
-      var itemsArray = [];
+      let itemsArray = [];
 
-      // Call functions to populate table and button
+      // Call functions to list items
       window.load=listItems(), showGrandTotal(), createItemsArray();
       clearButton.onclick = ClearAll;
       buyButton.onclick = buyItems;
 
-      // Populate table with items
+      // Items inventory
       function listItems() {
-        var key = "";
-        var link ="";
-        var list = "<tr>\
+        let key = "";
+        let list = "<tr>\
                       <th></th>\
                       <th>Antal</th>\
                       <th>Styckpris</th>\
                       <th>Radsumma</th>\
                     </tr>";
-        var i = 0;
-        //For a more advanced feature, you can set a cap on max items in the cart.
+        let i = 0;
         for (i = 0; i <= sessionStorage.length-1; i++) {
           key = sessionStorage.key(i);
           link = '<a href="' + key + '">' + key + '</a>';
@@ -60,7 +58,7 @@
           + JSON.parse(sessionStorage.getItem(key))[1] + "</td><td>"
           + JSON.parse(sessionStorage.getItem(key))[2] + "</td></tr>";
         }
-        //bind amount to HTML table.
+        // Bind list to HTML table.
         document.getElementById('list').innerHTML = list;
       }
 
