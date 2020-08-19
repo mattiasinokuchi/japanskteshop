@@ -112,7 +112,7 @@
           items: itemsArray,
           successUrl: DOMAIN + "/success.html?session_id={CHECKOUT_SESSION_ID}",
           cancelUrl: DOMAIN + "/canceled.html",
-          shippingAddressCollection: {allowedCountries: 'SE'}
+          shippingAddressCollection: {allowedCountries: ['SE']}
         }).then(handleResult);
       }
 
