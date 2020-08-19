@@ -7,16 +7,22 @@
     <script src="https://js.stripe.com/v3/"></script>
   </head>
   <body>
-    {{> header}}
-    <fieldset>
-      <legend>I korgen</legend>
-        <table id="list"></table>
-        <button id="clear">Töm korgen</button>
-        <button id="buy">
-          Köp för <span id="total">0</span> kr
-        </button>
-    </fieldset>
-    {{> footer}}
+    <header>
+      {{> header}}
+    </header>
+    <main>
+      <fieldset>
+        <legend>I korgen</legend>
+          <table id="list"></table>
+          <button id="clear">Töm korgen</button>
+          <button id="buy">
+            Köp för <span id="total">0</span> kr
+          </button>
+      </fieldset>
+    </main>
+    <footer>
+      {{> footer}}
+    </footer>
     <script>
 
       // Publishable key from API keys in the Stripe Dashboard
