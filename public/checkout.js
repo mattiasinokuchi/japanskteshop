@@ -16,21 +16,31 @@
 
       // Items inventory
       function listItems() {
-        let key = "";
-        let list = "<tr>\
-                      <th></th>\
-                      <th>Antal</th>\
-                      <th>Styckpris</th>\
-                      <th>Radsumma</th>\
-                    </tr>";
-        let i = 0;
-        for (i = 0; i <= sessionStorage.length-1; i++) {
-          key = sessionStorage.key(i);
-          link = '<a href="' + key + '">' + key + '</a>';
-          list += "<tr><td>" + link + "</td>\n<td>"
-          + JSON.parse(sessionStorage.getItem(key))[0] + "</td><td>"
-          + JSON.parse(sessionStorage.getItem(key))[1] + "</td><td>"
-          + JSON.parse(sessionStorage.getItem(key))[2] + "</td></tr>";
+        let list = "";
+        if (sessionStorage.length === 0) {
+          list = "Korgen är tom";
+          buyButton.disabled = true;
+          clearButton.disabled = true;
+        } else {
+          buyButton.disabled = false;
+          clearButton.disabled = false;
+          let key = "";
+          list =
+            "<tr>\
+              <th></th>\
+              <th>Antal</th>\
+              <th>Styckpris</th>\
+              <th>Radsumma</th>\
+            </tr>";
+          let i = 0;
+          for (i = 0; i <= sessionStorage.length-1; i++) {
+            key = sessionStorage.key(i);
+            link = '<a href="' + key + '">' + key + '</a>';
+            list += "<tr><td>" + link + "</td>\n<td>"
+            + JSON.parse(sessionStorage.getItem(key))[0] + "</td><td>"
+            + JSON.parse(sessionStorage.getItem(key))[1] + "</td><td>"
+            + JSON.parse(sessionStorage.getItem(key))[2] + "</td></tr>";
+          }
         }
         // Bind list to HTML table.
         document.getElementById('list').innerHTML = list;
