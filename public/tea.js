@@ -7,7 +7,6 @@
       const name = document.querySelector("#itemName").textContent;
       const price = parseInt(document.querySelector("#itemPrice").textContent);
       const sku = document.querySelector("#itemSku").textContent;
-      sku.hidden = true;
       let sumOfRow = "";
       let sumOfItems = "";
       let grandTotal = "";
